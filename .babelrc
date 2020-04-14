@@ -6,7 +6,7 @@
         "corejs": 2,
         "helpers": true,
         "regenerator": true,
-        "useESModules": false,
+        "useESModules": false
       }
     ]
   ],

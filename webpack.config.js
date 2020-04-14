@@ -7,6 +7,11 @@ module.exports = {
   entry: {
     main: './src/index.js'
   },
+  devServer: {
+    contentBase: './dist',
+    open: true, // 自动地打开一个浏览器并访问这个服务器的地址
+    port: 9000
+  },
   module: {
     rules: [{
       test: /\.js$/,

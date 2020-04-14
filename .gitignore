@@ -28,4 +28,6 @@ debugger-test/
 
 package-lock.json
 
-/test
+# gitbook
+/SUMMARY.md
+/_book
