@@ -1,0 +1,18 @@
+{
+  "name": "keyboardnavigation",
+  "version": "0.0.1",
+  "description": "基于React简洁易用键盘导航组件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@happyCoding1024.github.com:happyCoding1024/keyboardnavigation.git"
+  },
+  "keywords": [
+    "keyboardNavigation"
+  ],
+  "author": "happyCoding1024",
+  "license": "MIT"
+}
