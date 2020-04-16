@@ -1,12 +1,14 @@
 {
   "name": "keyboardnavigation",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "基于React简洁易用键盘导航组件",
-  "main": "index.js",
+  "main": "dist/bundle.js",
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "webpack",
-    "dev": "webpack-dev-server"
+    "bundle": "webpack --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --config webpack.dev.config.js ",
+    "build": "webpack --config webpack.prod.config.js"
   },
   "repository": {
     "type": "git",
@@ -23,11 +25,13 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^4.2.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",

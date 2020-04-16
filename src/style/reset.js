@@ -28,7 +28,6 @@ export const GlobalResetStyle = createGlobalStyle`
   }
   body {
     line-height: 1;
-    background: #fffcfc;
   }
   ol, ul {
     list-style: none;

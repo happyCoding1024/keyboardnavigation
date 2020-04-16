@@ -31,3 +31,6 @@ package-lock.json
 # gitbook
 /SUMMARY.md
 /_book
+
+# npm
+.npmignore

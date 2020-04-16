@@ -35,7 +35,7 @@ function genKeyboard(keyboardNavElem) {
         // 获取网址
           let website = e.currentTarget.getAttribute('title');
           if (website === '未设置网站导航') {
-              alert('此按键的网址还未设定')
+              alert('此按键的网址还未设定,请点击按键上的edit进行设定')
           } else {
               window.open('http://' + website, "_blank");
           }
@@ -140,8 +140,12 @@ function genKeyboard(keyboardNavElem) {
         // 提示用户输入
         let url = prompt(`请输入一个网址，例如 baidu.com`);
         // 将新输入的网址替换原来的网址
-        // TODO: 由于现在是存在变量中，当刷新页面后就会变成之前设置的
+
         hash[key] = url;
+
+        // TODO: 由于现在是存在变量中，当刷新页面后就会变成之前设置的
+        // 将hash对象写入到localStorage中，刷新页面后读取localStorage中的hash对象
+        localStorage.setItem('hash', JSON.stringify(hash));
 
         let button2 = e.target;
         // previousSibling:前一个兄弟节点
@@ -158,7 +162,6 @@ function genKeyboard(keyboardNavElem) {
     })
     return button;
   }
-
   return hash;
 
 }

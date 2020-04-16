@@ -6,7 +6,7 @@ margin: 0;
 text-align: center;
 min-width: 630px;
 box-shadow: 0 0 4px 0 #ccc;
-background: #fffcf1;
+background: #fffefc;
 display: inline-block;
 `;
 
@@ -14,15 +14,18 @@ export const KbdNavdesc = styled.div`
   font-size: 14px;
   line-height: 21px;
   h1 {
-    margin-bottom: 4px;
+    margin: 5px 0;
     font-size: 18px;
+  }
+  p {
+    color: #555;
   }
 `;
 
 export const KbdNav = styled.div`
   display: inline-block;
-  background: rgba(255,255,255,0.7);
   border-radius: 10px;
+  margin-bottom: 18px;
   kbd{
     display: inline-block;
     border: 1px solid red;
@@ -64,8 +67,7 @@ export const KbdNav = styled.div`
     width: 51px;
     height: 36px;
 
-    /*线性渐变:0-70白色,70-100,fff-f3f3f3渐变*/
-    background: linear-gradient(to bottom,#fffcfc 0%,#fffcfc 70%, #fafafa 100%);
+    background: linear-gradient(to bottom,#fff 0%,#fff1ff 40%,#fffcfc 100%);
     border-radius: 7px;
 
     box-shadow: 0 5px 0 0 #767d81;
