@@ -2,16 +2,15 @@
 
 ## 介绍
 
-一个简单易用的 React 键盘导航组件。
+一个基于 React 简洁实用的键盘导航组件。
 
 键盘导航组件展示
 
-![慧思博客项目主页](https://raw.githubusercontent.com/happyCoding1024/image-hosting/master/img/键盘导航页面.png)
+![键盘导航组件页面]( https://images.cnblogs.com/cnblogs_com/zhangguicheng/1718410/o_200416161204键盘导航组件页面.png )
 
 ## 功能列表
 
 - 键盘导航，按字母键跳转到设置的对应网站
-- 在页面输入框中输入时自动屏蔽键盘导航功能
 - `Alt+Q` 关闭键盘导航，`Alt+R` 重新开启键盘导航 
 
 - 点击按键自定义设置网址，重启不会失效
@@ -19,46 +18,75 @@
 
 ## TodoList
 
+- 输入框输入时自动关闭键盘导航
+
 - 键盘导航换肤
 
 - 自定义设置键盘导航标题和说明
 
 - 自定义设置键盘导航起始按键网址
+- 如果请求不到对应的 icon 则显示用户输入的文字
 
 ## 下载
 
-- 直接下载：
+- 直接下载：` https://github.com/happyCoding1024/keyboardnavigation/releases `
 
-- npm
-- CDN
+- npm：`npm install 'keyboardnavigation'`
+- CDN： `//unpkg.com/keyboardnavigation/dist/bundle.js`
 
 ## 使用示例
 
-在项目中安装键盘导航组件
+1）创建 React 项目（推荐使用 create-react-app）
 
 ```bash
-npm install keynav
+# 如果没有安装 create-react-app, npm install create-react-app -g 安装即可
+create-react-app Demo
 ```
 
-在项目中使用
+2）安装 keyboardnavigation 组件
+
+```bash
+npm install keyboardnavigation
+```
+
+3）将 src 文件夹下的 index.js 替换为下面的代码
 
 ```js
 import ReactDOM from 'react-dom';
-import KeyNav from 'keynav';
+import KeyNav from 'keyboardnavigation';
 
 ReactDOM.render(<KeyNav />, document.getElementById(root))
 
 ```
 
-[完整详细的示例及源代码]()
+4）运行
 
-## 运行 Demo
+```bash
+npm start
+```
 
-- 下载源码 `git clone git@github.com:happyCoding1024/keyboardnavigation.git`
-- 进入目录，安装依赖包 `cd keyboardnavigation` `npm install`
-- 依赖包安装完成后，运行 `npm run dev`
+## 项目开发
+
+1）下载源码 
+
+```bash
+git clone git@github.com:happyCoding1024/keyboardnavigation.git
+```
+
+2）进入项目根目录，安装依赖包 
+
+```bash
+cd keyboardnavigation
+npm install
+```
+
+3)依赖包安装完成后，运行
+
+```bash
+npm run dev
+```
 
 ## Update Log
 
-[UpdateLog](doc/dev/UpdateLog.md)
+[UpdateLog(记录遇到的问题和新增的功能等)](doc/dev/UpdateLog.md)
 
