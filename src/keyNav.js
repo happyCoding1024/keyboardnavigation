@@ -14,7 +14,7 @@ class KeyboardNavigation extends Component {
         <KbdNavWrapper>
           <KbdNavdesc className='KdbNavDesc'>
             <h1>键盘导航</h1>
-            <p>Alt+Q关闭键盘导航,Alt+R开启键盘导航，自定义原始键盘映射，输入时自动屏蔽键盘导航</p>
+            <p>Alt+Q关闭键盘导航,Alt+R开启键盘导航，自定义原始键盘映射</p>
           </KbdNavdesc>
           <KbdNav className='kbdNav' ref={(KbdNav) => {this.KbdNavElem=KbdNav}}></KbdNav> 
         </KbdNavWrapper>
