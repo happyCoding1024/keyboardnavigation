@@ -90,3 +90,12 @@ npm run dev
 
 [UpdateLog(记录遇到的问题和新增的功能等)](doc/dev/UpdateLog.md)
 
+
+## 联系作者
+
+- 在 [github issues](https://github.com/happyCoding1024/FrontendLearningTool/issues) 提交问题
+
+- [博客园 codingOrange](https://www.cnblogs.com/zhangguicheng/)
+
+- [b站直播前端学习(一天12小时以上)](https://space.bilibili.com/421338049)
+
