@@ -17,9 +17,6 @@ module.exports = {
     }]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
     new CleanWebpackPlugin({
       dry: false,
       cleanStaleWebpackAssets: true,
