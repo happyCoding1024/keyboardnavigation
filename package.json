@@ -1,6 +1,6 @@
 {
   "name": "keyboardnavigation",
-  "version": "0.1.1",
+  "version": "1.1.0",
   "description": "基于React简洁易用键盘导航组件",
   "main": "dist/bundle.js",
   "private": false,
