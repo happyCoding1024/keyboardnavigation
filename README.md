@@ -6,7 +6,7 @@
 
 键盘导航组件页面
 
-![键盘导航组件页面](https://raw.githubusercontent.com/happyCoding1024/image-hosting/master/img/键盘导航组件主页.png)
+![键盘导航组件页面](https://images.cnblogs.com/cnblogs_com/zhangguicheng/1749098/o_200423140547keyboardnavigation.png)
 
 ## 功能
 
@@ -14,15 +14,24 @@
 
 - `Alt+Q` 关闭键盘导航，`Alt+R` 重新开启键盘导航 
 
-- 点击按键自定义设置网址，刷新不会失效
+- 设置导航组件是否默认开启
 
-- 自定义设置键盘组件的大小，背景色，标题等
+- 自定义设置键盘导航组件的大小，背景色，标题等
 
-- 自定义键盘映射，刷新不会失效
+- 自定义设置键盘映射，刷新不会失效
 
 - 输入框输入时自动屏蔽键盘导航
 
-- 设置导航组件是否默认开启
+- 点击按键自定义设置网址
+
+- 点击按键设置网址时，图标会自动刷新
+
+**注意**
+
+
+- 输入框输入时自动屏蔽键盘导航功能需要将页面中的 input 节点作为导航组件的参数，具体设置见后面参数配置。
+
+- 获取图标采用的是读取网站根目录下 favicon.ico，如果 favicon 不在根目录下，那么会请求不到。
 
 ## 下载
 
@@ -35,7 +44,6 @@
 ## 使用示例
 
 1）创建 React 项目（推荐使用 create-react-app）
-
 ```bash
 # 如果没有安装 create-react-app, npm install create-react-app -g 安装即可
 create-react-app Demo
@@ -63,9 +71,9 @@ ReactDOM.render(<KeyNav />, document.getElementById(root))
 npm start
 ```
 
-**注：**
+## 参数配置
 
-上面的代码使用的都是导航组件的默认值，该组件提供了一些参数可以实现自定义导航组件的一些属性，提供的参数如下：
+上面的代码使用的都是导航组件的默认值，该组件提供了一些参数可以设置导航组件的一些属性，提供的参数如下：
 
 参数|作用|示例
 --|:--|--
@@ -89,9 +97,6 @@ hash|可选，设置原始键盘映射|hash={{'q': 'qq.com', ...}}
 - 如果感觉传递 input 元素 DOM 节点比较繁琐，可以在输入框中输入时利用 `Alt + Q` 关闭键盘导航，在输入完成后再利用 `Alt + R` 重新开启键盘导航。
 
 - 键盘导航默认是关闭的状态，可按 `Alt + R` 开启，或者将 `open` 参数设置为 `true` 修改默认为开启状态。
-
-- 建议设置的 subTitle 文字的长度小于下面键盘的高度，否则会撑开父元素影响美观。
-
 
 参数配置完整示例
 ```js
@@ -151,7 +156,6 @@ class App extends Component {
 export default App;
 ```
 
-
 ## 项目开发
 
 1）将此仓库 clone 到本地。
@@ -170,10 +174,18 @@ npm run dev
 
 ## Update Log
 
-[UpdateLog(记录遇到的问题和新增的功能等)](doc/dev/UpdateLog.md)
+这一部分记录了新增的功能，修正的 bug，解决问题的方法，TodoList，开发感悟等。
+
+[UpdateLog](doc/dev/UpdateLog.md)
 
 
 ## 联系作者
+
+如果您发现此项目有任何问题，希望可以抽时间告诉作者，感谢您的贡献，非常感谢。
+
+如果您感觉此项目还可以，欢迎 star 鼓励一下作者，非常感谢。
+
+联系方式：
 
 - 在 [github issues](https://github.com/happyCoding1024/FrontendLearningTool/issues) 提交问题
 
