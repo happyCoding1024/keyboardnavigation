@@ -6,7 +6,7 @@
 
 键盘导航组件页面
 
-![键盘导航组件页面](https://images.cnblogs.com/cnblogs_com/zhangguicheng/1749098/o_200423140547keyboardnavigation.png)
+![键盘导航组件页面](https://raw.githubusercontent.com/happyCoding1024/image-hosting/master/img/键盘导航组件主页页面.png)
 
 ## 功能
 
