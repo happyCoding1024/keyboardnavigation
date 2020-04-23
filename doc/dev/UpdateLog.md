@@ -2,11 +2,11 @@
 
 # UpdateLog
 
-## 2020年4月15日12:22:15（使用 localStorage）
+## 2020年4月15日（使用 localStorage）
 
 使用 localStorage 存储网址和字母的映射。
 
-## 2020年4月16日15:03:58（解决使用 import 引入组件失败的问题）
+## 2020年4月16日（解决使用 import 引入组件失败的问题）
 
 从昨天开始，当打包好后组件后，在本地使用  webpack-dev-server 可以跑起来，可是当使用 import 引入打包后的组件时，再使用 webpack-dev-server 就会报错。报错信息主要是下面这一种：
 
@@ -50,7 +50,7 @@
 
 [详解webpack的out.libraryTarget属性](https://blog.csdn.net/frank_yll/article/details/78992778)
 
-## 2020年4月16日18:24:29（解决 Minified React error #321 错误）
+## 2020年4月16日（解决 Minified React error #321 错误）
 
 在解决了上一个问题之后，npm start 后发现报以下的错误
 
@@ -144,3 +144,64 @@ externals: [nodeExternals()]
 
 使用 externals 去除的包在引用组件的项目中会被安装到组件的 node_modules，在 peerDenpendencices 中指定的依赖包会被安装到项目根目录下的 node_modules。 
 
+
+## 2020年4月22日（添加默认键盘导航状态等）
+
+### 添加了默认导航状态
+
+设置 open 参数来设置导航组件默认是否开启，true 表示开启，false 表示不开启。
+
+listenUser 函数中接收到 false 时是开启导航，true 时是关闭导航，这有点和用户的习惯不同，因此在传递参数时让用户传递 true 表示开启，false 表示关闭，至于中间的逻辑在 listenUser 中去做。 
+
+**收获**
+
+学会及时停止，这个感悟我写了不止一遍，在个人日记中写了也很多遍了，对于我来说真的很受用，当觉得现在状态很差，晕头转头向的时候不要再去接着写程序了，这个时候是很难解决问题的，写不会写出什么好的程序。这个时候停一下，做点其它的或者休息一下，将之前程序的问题捋一遍，然后再去解决问题，心里一定要有逻辑，不要靠运气。
+
+> TODO: (已完成)用户在线修改按键网址时，马上渲染出对应的图标
+### 用户在线修改按键网址时，如何马上渲染出对应的图标？
+通过在 KeyNav 组件的 state 中加一个 favChange 的属性，在 KeyNav 组件中添加一个方法 favChange()，将这个方法绑定 KeyNav 的 this 之后，然后传递给 createButton 函数，在 createbuton 函数中当点击 edit 时调用此方法来改变组件 KeyNav state 中的 favChange，然后组件就会被重新渲染，从而图标就会跟着更新。
+
+部分代码
+```js
+// KeyNav 组件
+favChange() {
+  this.setState(({
+    favChange: !this.state.favChange
+  }))
+}
+
+// createButton 函数
+ button.addEventListener('click', (e) => {
+   ...
+  // TODO: 当改变按键的网址时图标马上渲染出来
+  // 改变 state 中 favChange 的状态，令改变的网址的图标重新渲染出来
+  favChange();
+ })
+```
+**收获**
+
+其实这个逻辑之前就做了，但是由于正则匹配时正则表达式写的不完备，导致有错误没有及时发现，结果导致这个功能也不能正常实现，将正则修改正确后，这个功能也能正常实现了。
+
+以后一定要多看 console 窗口，有错误及时解决。
+
+### 如何兼容用户输入的网址
+使用正则表达式，无论用户输入带https的或者不带https的都可以将一级域名解析出来。
+
+```js
+const reg = /^(http:\/\/|https:\/\/)?([\w.-]+)(?=\/|$)/
+const result = url.match(reg)
+```
+
+例如 
+
+`https://www.baidu.com` 经过正则匹配之后，result[2] 中是 `www.baidu.com`
+
+`https://www.baidu.com/104` 经过正则匹配之后， result[2] 中是 `www.baidu.com/104`
+
+`baidu.com` 经过正则匹配之后， result[2] 中是 `baidu.com`
+
+
+## 2020年4月23日（刷新变为用户输入的hash值）
+
+> TODO:  现在现在当刷新页面时，组件重新加载后键盘的映射变为用户传入的 hash，在线设置的就是失效了，接下来要做的是比较 localStorage 中的值和用户传入的  hash 值，如果和 localStorage 中的值不相同那么就忽略用户输入的 hash 值
+> TODO: 使用 GithubPage 预览
