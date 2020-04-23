@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const KbdNavWrapper = styled.div`
-position: relative;
-margin: 0;
-text-align: center;
-min-width: 630px;
-box-shadow: 0 0 4px 0 #ccc;
-background: #fffefc;
-display: inline-block;
+  position: relative;
+  margin: 0;
+  text-align: center;
+  min-width: 630px;
+  box-shadow: 0 0 4px 0 #ccc;
+  background: linear-gradient(to right, #fff8f8 0%, #fffeef 50%,#fbfdff 70%, #f5f4f9 100%);
+  display: inline-block;
+  padding: 0 10px;
 `;
 
 export const KbdNavdesc = styled.div`
@@ -59,35 +60,24 @@ export const KbdNav = styled.div`
   &>div:nth-child(3){
     margin-left: -112px;
   }
-  /*美化按键*/
+
   .kbd{
-    margin: 0;
+    margin: 4px;
     padding: 0;
-    border:0;
+    border: 1px solid #ccc;
     width: 51px;
-    height: 36px;
+    height: 39px;
 
     background: linear-gradient(to bottom,#fff 0%,#fff1ff 40%,#fffcfc 100%);
     border-radius: 7px;
 
-    box-shadow: 0 5px 0 0 #767d81;
+    box-shadow: 0 6px 1px 0 #767d81;
     color: #767D81;
     font-family: Helvetical;
 
 
     vertical-align: top;
     position: relative;
-  }
-  .kbd_wrapper{
-    display: inline-block;
-    vertical-align: top;
-
-    width: 51px;
-    height: 41px;
-    border-radius: 7px;
-    margin: 0 5px;
-
-    box-shadow: 0 4px 3px 0 #3C3C3D,0 0 1px 0 #3C3C3D;
   }
   &>div{
     margin: 10px 0;
@@ -104,25 +94,6 @@ export const KbdNav = styled.div`
     position: absolute;
     left: 7px;
     top: 4px;
-  }
-  .kbd_wrapper:hover {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  }
-  
-  @keyframes shake{
-    10%, 90% {
-        transform: translate3d(-1px, 0, 0);
-    }
-    20%, 80% {
-        transform: translate3d(2px, 0, 0);
-    }
-    
-    30%, 50%, 70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-    40%, 60% {
-        transform: translate3d(4px, 0, 0);
-    }
   }
 `;
 
