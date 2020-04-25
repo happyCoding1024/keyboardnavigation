@@ -174,7 +174,7 @@ npm run dev
 
 ## Update Log
 
-这一部分记录了新增的功能，修正的 bug，解决问题的方法，TodoList，开发感悟等。
+记录新增的功能，修正的 bug，解决问题的方法，TodoList，开发感悟等。
 
 [UpdateLog](doc/dev/UpdateLog.md)
 
@@ -187,7 +187,7 @@ npm run dev
 
 联系方式：
 
-- 在 [github issues](https://github.com/happyCoding1024/FrontendLearningTool/issues) 提交问题
+- 在 [github issues](https://github.com/happyCoding1024/keyboardnavigation/issues) 提交问题
 
 - [博客园 codingOrange](https://www.cnblogs.com/zhangguicheng/)
 
