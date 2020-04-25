@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import listenUser from './listenUser';
 import handleFocus from './handleFocus';
 import { KbdNavWrapper, KbdNav, KbdNavdesc } from './style/style';
-import { GlobalResetStyle } from './style/reset';
 
 class KeyboardNavigation extends Component {
 
@@ -18,7 +17,6 @@ class KeyboardNavigation extends Component {
   render() {
     return (
       <Fragment>
-        <GlobalResetStyle />
         <KbdNavWrapper ref={(KbdNavWrapperElem) => {this.KbdNavWrapperElem = KbdNavWrapperElem}}>
           <KbdNavdesc className='KdbNavDesc'>
             <h1>{this.props.title || '键盘导航'}</h1>
@@ -49,44 +47,20 @@ class KeyboardNavigation extends Component {
     // 用户传 true 时表示想开启，此时取反即可对应程序中不开启。当用户传 false 和不传时都默认不开启，此时取反为true，正好对应程序中的不开启。
     let openStatus = !this.props.open 
     listenUser(this.hash, openStatus)
-    const { inputElemArr } = this.props;
     // Ctrl + q 停用键盘导航
     document.addEventListener('keydown', (event) => {
       const keyCode = event.keyCode || event.which || event.charCode;
       const altKey = event.altKey || event.metaKey;
+      const { inputElemArr } = this.props;
       if (altKey && keyCode === 81) {
         if (!(altKey && keyCode === 82)) {
           alert('您已停用键盘导航，按alt+r可重新开启键盘导航');
           listenUser(this.hash, true)
         }
       } else if (altKey && keyCode === 82) {
-          alert('您已开启键盘导航，按alt+p可关闭键盘导航');
-          listenUser(this.hash, false)          
-          handleFocus(inputElemArr, this.hash);
-      }
-    })
-  }
-
-  componentDidUpdate() {
-    const { inputElemArr } = this.props;
-    // Ctrl + q 停用键盘导航
-    document.addEventListener('keydown', (event) => {
-      const keyCode = event.keyCode || event.which || event.charCode;
-      const altKey = event.altKey || event.metaKey;
-      // 读取 localStorage 中的 hash 值
-      if (localStorage.getItem('hash')) {
-        // 注意需要将得到的JSON字符串转换为对象
-        this.hash = JSON.parse(localStorage.getItem('hash'));
-      }
-      if (altKey && keyCode === 81) {
-        if (!(altKey && keyCode === 82)) {
-          alert('您已停用键盘导航，按alt+r可重新开启键盘导航');
-          listenUser(this.hash, true)
-        }
-      } else if (altKey && keyCode === 82) {
-          alert('您已开启键盘导航，按alt+p可关闭键盘导航');
-          listenUser(this.hash, false)          
-          handleFocus(inputElemArr, this.hash);
+        alert('您已开启键盘导航，按alt+p可关闭键盘导航');
+        listenUser(this.hash, false)          
+        handleFocus(inputElemArr, this.hash);
       }
     })
   }
