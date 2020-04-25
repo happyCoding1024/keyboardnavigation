@@ -205,3 +205,8 @@ const result = url.match(reg)
 
 > TODO:  现在现在当刷新页面时，组件重新加载后键盘的映射变为用户传入的 hash，在线设置的就是失效了，接下来要做的是比较 localStorage 中的值和用户传入的  hash 值，如果和 localStorage 中的值不相同那么就忽略用户输入的 hash 值
 > TODO: 使用 GithubPage 预览
+
+## 2020年4月25日（解决Alt+Q弹出多次输入框的问题）
+
+在之前的代码中，componentDidMount 和 componentDidUpdate 中都写了绑定 keydown 事件的代码，这样当点击 Alt + Q 时如果组件的 props 或者 state 发生变化，那么这两个事件都会响应，那么就会产生多次弹出框。
+其实这是没有必要的，只要在 componentDidMount 中绑定一次就好了，当时这样写的原因记得是为了当 this.props 中的值改变时便于接收用户传入的 input 元素数组，其实可以将接收用户传入的 input 元素数组的代码放在事件处理程序中也可以。
