@@ -25,14 +25,6 @@ function compareObject (obj1, obj2) {
       break;
     }
   }
-  // for (key of obj1PropsArr) {
-  //   status = compareObject(obj1[key], obj2[key]);
-  //   // 关键代码，当 status 为 false 时下面就不用再进行判断了，说明两个对象的内容并不相同
-  //   // 如果没有下面这条语句，那么只要对象底层的内容是相同的那么就返回 true
-  //   if (!status) {
-  //     break;
-  //   }
-  // }
   // 每次 compareObject 执行的返回结果
   return status;
 }

@@ -152,7 +152,6 @@ class KeyboardNavigation extends Component {
         const localHash = JSON.parse(localStorage.getItem('hash'));
         if (!compareObject(hash, localHash)) {
           hash = localHash;
-          console.log('hash = ', hash);
         }
       }
       // 将hash对象写入到localStorage中，刷新页面后读取localStorage中的hash对象
