@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import listenUser from './listenUser';
 import handleFocus from './handleFocus';
+import compareObject from './compareObject';
+import { GlobalResetStyle } from './style/reset';
 import { KbdNavWrapper, KbdNav, KbdNavdesc } from './style/style';
-
 class KeyboardNavigation extends Component {
 
   constructor(props) {
@@ -17,6 +18,7 @@ class KeyboardNavigation extends Component {
   render() {
     return (
       <Fragment>
+        <GlobalResetStyle />
         <KbdNavWrapper ref={(KbdNavWrapperElem) => {this.KbdNavWrapperElem = KbdNavWrapperElem}}>
           <KbdNavdesc className='KdbNavDesc'>
             <h1>{this.props.title || '键盘导航'}</h1>
@@ -29,24 +31,25 @@ class KeyboardNavigation extends Component {
   }
 
   componentDidMount() {
-    // 设置 KbdNavWrapperElem 的样式
-    if (this.props.navWidth) {
-      this.KbdNavWrapperElem.style.width = `${this.props.navWidth}`
+    const {navWidth, navHeight, navBgc, hash} = this.props;
+    // 使用用户传递过来 KbdNavWrapperElem 的样式
+    if (navWidth) {
+      this.KbdNavWrapperElem.style.width = `${navWidth}`;
     }
-    if (this.props.navheight) {
-      this.KbdNavWrapperElem.style.height = `${this.props.navheight}`
+    if (navHeight) {
+      this.KbdNavWrapperElem.style.height = `${navHeight}`;
     }
-    this.KbdNavWrapperElem.style.background = `${this.props.navBgc || 'linear-gradient(to right, #fff8f8 0%, #fffeef 50%,#fbfdff 70%, #f5f4f9 100%)'}`
+    this.KbdNavWrapperElem.style.background = `${navBgc || 'linear-gradient(to right, #fff8f8 0%, #fffeef 50%,#fbfdff 70%, #f5f4f9 100%)'}`;
     
-    // 如果用户传递进来 hash 值，那么就使用用户传递进来的 hash 值
-    this.hash = this.genKeyboard(this.KbdNavElem, this.props.hash);
+    // 如果用户传递进来 hash 值，在 genKeyboard 中进行逻辑判断是否使用这个 hash 值
+    this.hash = this.genKeyboard(this.KbdNavElem, hash);
     
     // 刚打开页面时，要能监听用户的按键。下面的componentDidUpdate要在更新数据之后才会响应。
     // 修改默认不开启键盘导航, true 表示关闭键盘导航，false 表示开启键盘导航
     // 正常思维下，true时为开启，但是程序的实现是不开启，为了照顾用户体验，当用户传递true时表示开启。
     // 用户传 true 时表示想开启，此时取反即可对应程序中不开启。当用户传 false 和不传时都默认不开启，此时取反为true，正好对应程序中的不开启。
-    let openStatus = !this.props.open 
-    listenUser(this.hash, openStatus)
+    let openStatus = !this.props.open; 
+    listenUser(this.hash, openStatus);
     // Ctrl + q 停用键盘导航
     document.addEventListener('keydown', (event) => {
       const keyCode = event.keyCode || event.which || event.charCode;
@@ -55,11 +58,11 @@ class KeyboardNavigation extends Component {
       if (altKey && keyCode === 81) {
         if (!(altKey && keyCode === 82)) {
           alert('您已停用键盘导航，按alt+r可重新开启键盘导航');
-          listenUser(this.hash, true)
+          listenUser(this.hash, true);
         }
       } else if (altKey && keyCode === 82) {
         alert('您已开启键盘导航，按alt+p可关闭键盘导航');
-        listenUser(this.hash, false)          
+        listenUser(this.hash, false);          
         handleFocus(inputElemArr, this.hash);
       }
     })
@@ -72,16 +75,16 @@ class KeyboardNavigation extends Component {
     let hash = startHash.hash;
     
     //遍历keys,生成kbd标签
-    for (let index = 0; index < keys['length']; index++) {
+    for (let index = 0, keyLen = keys.length; index < keyLen; index++) {
+      // 每个 div 表示键盘上的一行
       const div = tag('div');
       // keyboardNavElem是通过ref获得的DOM元素，都挂载到这个元素上
-      let main = keyboardNavElem;
-      main.appendChild(div);  
+      keyboardNavElem.appendChild(div);  
+      // row 中存放着键盘每一行的字母
       let row = keys[index];
-      for (let index2 = 0; index2 < row.length; index2++) {
-        // span中的内容是字母
+      for (let index2 = 0, rowLen = row.length; index2 < rowLen; index2++) {
+        // row[index2]中的内容是字母
         let span = createSpan(row[index2]);
-        // button的内容也是字母
         let button = createButton(row[index2], this.favChange);
         // hash[row[index2]] 是网址
         let img = createImg(hash[row[index2]]);
@@ -109,12 +112,11 @@ class KeyboardNavigation extends Component {
     }
   
     function init() {
-      let keys = {
-        '0': { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10 },
-        '1': ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-        '2': ['z', 'x', 'c', 'v', 'b', 'n', 'm'],  
-        'length': 3
-      };
+      let keys = [
+        ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+        ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+      ];
       let hash = {
         'q': 'cnblogs.com/zhangguicheng/',
         'w': 'https://space.bilibili.com/421338049',
@@ -145,6 +147,14 @@ class KeyboardNavigation extends Component {
       };
       // 如果用户传递进来 hash 值就使用用户传递进来的 hash 值
       hash = customHash ? customHash : hash;
+      // 判断 localStorage 中是否有值，如果有值是否和customHash相同
+      if (localStorage.getItem('hash')) {
+        const localHash = JSON.parse(localStorage.getItem('hash'));
+        if (!compareObject(hash, localHash)) {
+          hash = localHash;
+          console.log('hash = ', hash);
+        }
+      }
       // 将hash对象写入到localStorage中，刷新页面后读取localStorage中的hash对象
       localStorage.setItem('hash', JSON.stringify(hash));
       // 从 localStorage 中获取 hash 值
@@ -209,9 +219,10 @@ class KeyboardNavigation extends Component {
         localStorage.setItem('hash', JSON.stringify(hash))
         let button2 = e.target;
         // previousSibling:前一个兄弟节点
+        // 在 kbd 标签中子节点的顺序 span img button
         let img2 = button2.previousSibling;
 
-        // TODO: 提取 url 的一级域名，例如 baidu.com/login/a.html 提取后变为 baidu.com 这样就可以获取到 favicon
+        // TODO: (已完成)提取 url 的一级域名，例如 baidu.com/login/a.html 提取后变为 baidu.com 这样就可以获取到 favicon
         const reg = /^(http:\/\/|https:\/\/)?([\w.-]+)(?=\/|$)/
         const result = url.match(reg)
         img2.src = 'https://' + result[2] + '/favicon.ico';
@@ -219,7 +230,7 @@ class KeyboardNavigation extends Component {
           err.target.src = 'https://images.cnblogs.com/cnblogs_com/zhangguicheng/1682690/o_200412140537point.png';
         };
 
-        // TODO: 当改变按键的网址时图标马上渲染出来
+        // TODO: （已完成）当改变按键的网址时图标马上渲染出来
         // 改变 state 中 favChange 的状态，令改变的网址的图标重新渲染出来
         favChange();
       })
