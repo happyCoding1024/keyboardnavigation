@@ -2,6 +2,10 @@
 
 # UpdateLog
 
+## TodoList
+
+- 可以在其它环境中使用，例如 Vue，通过 script 标签引入等
+
 ## 2020年4月15日（使用 localStorage）
 
 使用 localStorage 存储网址和字母的映射。
@@ -173,7 +177,7 @@ favChange() {
 // createButton 函数
  button.addEventListener('click', (e) => {
    ...
-  // TODO: 当改变按键的网址时图标马上渲染出来
+  // TODO: （已完成）当改变按键的网址时图标马上渲染出来
   // 改变 state 中 favChange 的状态，令改变的网址的图标重新渲染出来
   favChange();
  })
@@ -203,10 +207,63 @@ const result = url.match(reg)
 
 ## 2020年4月23日（刷新变为用户输入的hash值）
 
-> TODO:  现在现在当刷新页面时，组件重新加载后键盘的映射变为用户传入的 hash，在线设置的就是失效了，接下来要做的是比较 localStorage 中的值和用户传入的  hash 值，如果和 localStorage 中的值不相同那么就忽略用户输入的 hash 值
+> TODO: （见5月3日）现在现在当刷新页面时，组件重新加载后键盘的映射变为用户传入的 hash，在线设置的就是失效了，接下来要做的是比较 localStorage 中的值和用户传入的  hash 值，如果和 localStorage 中的值不相同那么就忽略用户输入的 hash 值
 > TODO: 使用 GithubPage 预览
 
 ## 2020年4月25日（解决Alt+Q弹出多次输入框的问题）
 
 在之前的代码中，componentDidMount 和 componentDidUpdate 中都写了绑定 keydown 事件的代码，这样当点击 Alt + Q 时如果组件的 props 或者 state 发生变化，那么这两个事件都会响应，那么就会产生多次弹出框。
 其实这是没有必要的，只要在 componentDidMount 中绑定一次就好了，当时这样写的原因记得是为了当 this.props 中的值改变时便于接收用户传入的 input 元素数组，其实可以将接收用户传入的 input 元素数组的代码放在事件处理程序中也可以。
+
+## 2020年5月3日（实现用户自定义使用上传的hash还是localStorage中的hash）
+
+在用户在线设置了网址后,再次刷新之后就会再次使用传入的 hash，这是用户不希望看到的，用户希望页面刷新之后使用的是自己在线设置的网址。
+
+这个时候需要比较 localStorage 中存储的 hash 和用户输入的 hash 进行比较，因为两个都是对象，所以不能直接利用 `===` 进行比较，因此借助了深拷贝的思想写了一个比较两个对象内容的函数。
+
+```js
+function compareObject (obj1, obj2) {
+  // 递归终止条件，当 obj1 或 obj2 不是对象时，此时就可以进行判断了
+  if (typeof obj1 !== 'object' || typeof obj2 !== 'object') {
+      if (obj1 === obj2) {
+        return true;
+      } else if (obj1 !== obj2) {
+        return false;
+      }
+  }
+  // 获取对象的自由属性组成的数组
+  const obj1PropsArr = Object.getOwnPropertyNames(obj1)
+  const obj2PropsArr = Object.getOwnPropertyNames(obj2) 
+  // 如果数组的长度不相等，那么说明对象属性的个数都不同，返回 false
+  if (obj1PropsArr.length !== obj2PropsArr.length) {
+    return false;
+  }
+  // 记录当前 compareObject 的返回值，默认是 true
+  let status = true;
+  for (let i = 0, len = obj1PropsArr.length; i < len; i++) {
+    let key = obj1PropsArr[i];
+    status = compareObject(obj1[key], obj2[key]);
+    // 关键代码，当 status 为 false 时下面就不用再进行判断了，说明两个对象的内容并不相同
+    // 如果没有下面这条语句，那么只要对象底层的内容是相同的那么就返回 true
+    if (!status) {
+      break;
+    }
+  }
+  // 每次 compareObject 执行的返回结果
+  return status;
+}
+```
+在决定使用哪个 hash 的地方使用 `compareObject` 进行判断。
+
+```js
+// 判断 localStorage 中是否有值，如果有值是否和customHash相同
+if (localStorage.getItem('hash')) {
+  const localHash = JSON.parse(localStorage.getItem('hash'));
+  if (!compareObject(hash, localHash)) {
+    hash = localHash;
+    console.log('hash = ', hash);
+  }
+}
+```
+
+首先判断 localStorage 中是否有 hash 值，在用户第一次加载或者清理了内存后是 localStorage 中是没有 hash 的。如果有，那么再判断两个 hash 对象的内容是否相同，如果不同，那么就使用 localStorage 中的 hash 值。
