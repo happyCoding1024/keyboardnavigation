@@ -3,7 +3,9 @@
   "version": "1.1.4",
   "description": "基于React简洁易用键盘导航组件",
   "main": "dist/bundle.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

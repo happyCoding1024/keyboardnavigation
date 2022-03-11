@@ -188,11 +188,11 @@ class KeyboardNavigation extends Component {
         img.src = 'http://' + result[2] + '/favicon.ico';
       } else {
         //如果src为空,就会进入当前的网址,导致图片显现不出来,所以给他一个存在的图片
-        img.src = 'https://images.cnblogs.com/cnblogs_com/zhangguicheng/1682690/o_200412140537point.png';
+        // img.src = 'https://images.cnblogs.com/cnblogs_com/zhangguicheng/1682690/o_200412140537point.png';
       }
       img.onerror = function (ev) {
         //onerror事件,监听img的get请求错误事件
-        ev.target.src = 'https://images.cnblogs.com/cnblogs_com/zhangguicheng/1682690/o_200412140537point.png';
+        // ev.target.src = 'https://images.cnblogs.com/cnblogs_com/zhangguicheng/1682690/o_200412140537point.png';
         //把没有请求到的错误事件的src定为那个点
       };
       return img;
